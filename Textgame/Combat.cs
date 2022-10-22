@@ -18,9 +18,6 @@ namespace Textgame
             Console.WriteLine("1. attack");
             Console.WriteLine("2. run away");
             string input = Console.ReadLine();
-            
-            
-            Console.WriteLine("Monstret är död.");
 
         }
     }
