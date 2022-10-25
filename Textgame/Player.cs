@@ -11,18 +11,17 @@ namespace Textgame
     public class Player
     {
         public string Name { get; set; }
-        private int Power = 5;
-
-        public bool Isdead { get; private set; }
-        Random random = new Random();
-        public int CurrentHitPoints = 15;
+        public int Power = 6;
+        public bool Isdead { get; set; }
+        public int CurrentHitPoints { get; set; } = 15;
         public int Armor = 1;
         public int Xp = 0;
         public int HealthPotions = 3;
         public int MaxHitPoints = 15;
-        public bool IsDead = false;
         public int attack;
         public int Gold = 0;
+        public int Level = 0;
+        Random random = new Random();
 
 
         public Player(string name)
@@ -33,17 +32,17 @@ namespace Textgame
         public void PrintStats()
         {
             Console.WriteLine($"Name   : {Name}");
-            Console.WriteLine($"Hp     : {CurrentHitPoints}");
+            Console.WriteLine($"Hp     : {CurrentHitPoints}/{MaxHitPoints}");
             Console.WriteLine($"Power  : {Power}");
-            Console.WriteLine($"Potions: {HealthPotions}");
             Console.WriteLine($"Armor  : {Armor}");
+            Console.WriteLine();
+            Console.WriteLine($"Potions: {HealthPotions}");
             Console.WriteLine($"Gold   : {Gold}");
             Console.WriteLine($"Xp     : {Xp}");
         }
         public void Attack(Creature target)
         {
             attack = random.Next(0, Power);
-            Console.WriteLine($"{Name} attack and scores {attack} dmg");
         }
         public void PrintCombatStats()
         {
@@ -54,7 +53,7 @@ namespace Textgame
             {
                 Console.ForegroundColor = ConsoleColor.Red;
             }
-            Console.WriteLine($"HP            : {CurrentHitPoints}");
+            Console.WriteLine($"HP            : {CurrentHitPoints}/{MaxHitPoints}");
             Console.ResetColor();
             Console.WriteLine($"Power         : {Power}");
             Console.WriteLine($"Armor         : {Armor}");
@@ -63,31 +62,29 @@ namespace Textgame
         public void TakeDamage(int attack)
         {
             CurrentHitPoints -= attack;
-            if (CurrentHitPoints <= 0)
-            {
-                Isdead = true;
-                CurrentHitPoints = 0;
-                Die();
-            }
-            Console.WriteLine($"{Name} have {CurrentHitPoints} hp left");
         }
 
         public void LevelUp()
         {
-            MaxHitPoints += 1;
-            Power += 2;
-        }
-
-        public void AvslutaSpelet()
-        {
-            Console.WriteLine("tyvärr dog du, spelet är slut.");
-            Environment.Exit(0);
+            Level++;
+            MaxHitPoints += 2;
+            Power++;
+            CurrentHitPoints = MaxHitPoints;
+            
+            Console.WriteLine("Congrats! you have leveled up.");
+            Console.WriteLine($"Level: {Level}");
+            Console.WriteLine($"HP   : {MaxHitPoints}");
+            Console.WriteLine($"Power: {Power}");
         }
 
         public void Heal()
         {
+            Console.Clear();
+            Console.WriteLine($"Hp: {CurrentHitPoints}/{MaxHitPoints}");
             Console.WriteLine($"You have {HealthPotions} potions left.");
             Console.WriteLine("Press 1 to heal.");
+            Console.WriteLine("Press 2 to back.");
+            
             string input = Console.ReadLine();
             if (input == "1")
             {
@@ -96,16 +93,12 @@ namespace Textgame
                     CurrentHitPoints = MaxHitPoints;
                     HealthPotions--;
                 }
-
                 Console.WriteLine("You have not enough health potions...");
             }
+
         }
 
-        public void Die()
-        {
-            Console.WriteLine("Du är död");
-            Environment.ExitCode = 0;
-        }
+        
 
     }
 }

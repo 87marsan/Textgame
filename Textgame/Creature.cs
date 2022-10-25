@@ -16,39 +16,26 @@ namespace Textgame
         public int Armor { get; set; }
         public int attack;
         public bool Isdead = false;
-       
-        
-        
-        public Creature(string name, int power, int currenthitPoints, int armor)
+        Random random = new Random();
+
+
+        public Creature(string name, int power, int currentHitPoints, int armor)
         {
             Name = name;
             Power = power;
-            CurrentHitPoints = currenthitPoints;
+            CurrentHitPoints = currentHitPoints;
             Armor = armor;
         }
         public void Attack(Player target)
         {
-            Random random = new Random();
+
             attack = random.Next(0, Power);
-            Console.WriteLine($"{Name} attack and scores {attack} dmg");
+
 
         }
         public void TakeDamage(int attack)
         {
             CurrentHitPoints -= attack;
-            if (CurrentHitPoints <= 0)
-            {
-                Isdead = true;
-                CurrentHitPoints = 0;
-                Die();
-            }
-            Console.WriteLine($"{Name} have {CurrentHitPoints} hp left");
-        }
-
-        public void Die()
-        {
-            Console.WriteLine($"{Name} is dead!!");
-            
         }
 
         public void PrintStats()
@@ -65,13 +52,14 @@ namespace Textgame
             Console.WriteLine($"Power         : {Power}");
             Console.WriteLine($"Armor         : {Armor}");
             Console.WriteLine("===================");
-            
-            
+
+
         }
 
-        
-        
 
-        
+
+
+
     }
+
 }
