@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.XPath;
+using Console = System.Console;
 
 namespace Textgame
 {
@@ -10,36 +12,66 @@ namespace Textgame
     {
         public string Name { get; set; }
         public int Power { get; set; }
-        public int HitPoints { get; set; }
+        public int CurrentHitPoints { get; set; }
         public int Armor { get; set; }
-        public bool IsDead;
         public int attack;
-
-        public Creature(string name, int power, int hitPoints, int armor)
+        public bool Isdead = false;
+       
+        
+        
+        public Creature(string name, int power, int currenthitPoints, int armor)
         {
             Name = name;
             Power = power;
-            HitPoints = hitPoints;
+            CurrentHitPoints = currenthitPoints;
             Armor = armor;
-            
         }
-
-        public int Attack()
+        public void Attack(Player target)
         {
             Random random = new Random();
             attack = random.Next(0, Power);
-            Console.WriteLine($"You hit with {attack} dmg");
-            return attack;
+            Console.WriteLine($"{Name} attack and scores {attack} dmg");
+
+        }
+        public void TakeDamage(int attack)
+        {
+            CurrentHitPoints -= attack;
+            if (CurrentHitPoints <= 0)
+            {
+                Isdead = true;
+                CurrentHitPoints = 0;
+                Die();
+            }
+            Console.WriteLine($"{Name} have {CurrentHitPoints} hp left");
         }
 
-        public void Defend(int attack)
+        public void Die()
         {
-            HitPoints -= attack;
-            Console.WriteLine($"Monster have {HitPoints} left");
-            if (HitPoints <= 0)
-            {
-                IsDead = true;
-            }
+            Console.WriteLine($"{Name} is dead!!");
+            
         }
+
+        public void PrintStats()
+        {
+            Console.WriteLine(Name);
+            Console.WriteLine("===================");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            if (CurrentHitPoints < 4)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
+            Console.WriteLine($"HP            : {CurrentHitPoints}");
+            Console.ResetColor();
+            Console.WriteLine($"Power         : {Power}");
+            Console.WriteLine($"Armor         : {Armor}");
+            Console.WriteLine("===================");
+            
+            
+        }
+
+        
+        
+
+        
     }
 }

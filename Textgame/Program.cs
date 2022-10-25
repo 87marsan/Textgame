@@ -2,27 +2,27 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
-        {
-            Start();
-        }
+        static void Main(string[] args) => Start();
+
         static void Start()
         {
-            Player player = new Player("player", 10, 15, 0);
-            Creature monster = new Creature("Rat", 5, 12, 0);
+            Player player = new Player("player");
+            Creature monster = new Creature("Rat", 5, 6, 0);
             Combat combat = new Combat();
+          
 
-            Console.WriteLine("Vad heter du?");
+            Console.WriteLine("What is your characters name: ");
             player.Name = Console.ReadLine();
 
+            
             combat.Fight(player, monster);
-
-            player.Attack();
-            monster.Defend(player.attack);
+            combat.Fight(player, new Creature("Snake", 6,5,0));
+            
+            player.PrintStats();
+            Console.ReadLine();
+           
 
             Console.ReadKey();
-
-            
         }
         
         
