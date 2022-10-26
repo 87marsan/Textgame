@@ -11,16 +11,17 @@ namespace Textgame
     public class Player
     {
         public string Name { get; set; }
-        public int Power = 6;
-        public bool Isdead { get; set; }
+        public int Power = 5;
         public int CurrentHitPoints { get; set; } = 15;
         public int Armor = 1;
         public int Xp = 0;
-        public int HealthPotions = 3;
+        public int HealthPotions = 2;
         public int MaxHitPoints = 15;
         public int attack;
-        public int Gold = 0;
+        public int Gold = 30;
         public int Level = 0;
+        public bool HasKey = false;
+        public int Kills = 0;
         Random random = new Random();
 
 
@@ -31,14 +32,19 @@ namespace Textgame
 
         public void PrintStats()
         {
+            
             Console.WriteLine($"Name   : {Name}");
             Console.WriteLine($"Hp     : {CurrentHitPoints}/{MaxHitPoints}");
             Console.WriteLine($"Power  : {Power}");
             Console.WriteLine($"Armor  : {Armor}");
+            Console.WriteLine($"Level  : {Level}");
             Console.WriteLine();
             Console.WriteLine($"Potions: {HealthPotions}");
+            Console.WriteLine();
             Console.WriteLine($"Gold   : {Gold}");
             Console.WriteLine($"Xp     : {Xp}");
+            Console.WriteLine($"Kills  : {Kills}");
+            
         }
         public void Attack(Creature target)
         {
@@ -50,9 +56,8 @@ namespace Textgame
             Console.WriteLine("===================");
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             if (CurrentHitPoints < 4)
-            {
                 Console.ForegroundColor = ConsoleColor.Red;
-            }
+            
             Console.WriteLine($"HP            : {CurrentHitPoints}/{MaxHitPoints}");
             Console.ResetColor();
             Console.WriteLine($"Power         : {Power}");
@@ -70,11 +75,12 @@ namespace Textgame
             MaxHitPoints += 2;
             Power++;
             CurrentHitPoints = MaxHitPoints;
-            
-            Console.WriteLine("Congrats! you have leveled up.");
+            Console.Clear();
+            Console.WriteLine("Congrats, you have leveled up!");
             Console.WriteLine($"Level: {Level}");
             Console.WriteLine($"HP   : {MaxHitPoints}");
             Console.WriteLine($"Power: {Power}");
+            Console.ReadKey();
         }
 
         public void Heal()

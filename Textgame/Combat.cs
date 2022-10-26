@@ -70,6 +70,7 @@ namespace Textgame
                         Console.WriteLine();
                         Console.WriteLine($"The awful enemy {monster.Name} attack and deals {monster.attack} damage!");
                         Console.ReadLine();
+                        
                         if (player.CurrentHitPoints <= 0)
                         {
                             Console.WriteLine($"The evil {monster.Name} killed you... You are too weak!");
@@ -81,7 +82,7 @@ namespace Textgame
                     case "2":
                         player.Heal();
                         break;
-                    default:
+                    case "3":
                         Console.WriteLine($"{player.Name} tries to run away...");
                         var nr = random.Next(minValue:1, maxValue:3);
                         switch (nr)
@@ -106,6 +107,9 @@ namespace Textgame
                                 break;
                         }
                         break;
+                    default:
+                        Console.WriteLine("Invalid choice...");
+                        break;
                 }
             }
         }
@@ -117,15 +121,17 @@ namespace Textgame
 
             player.Gold = player.Gold + gold;
             player.Xp = player.Xp + xp;
+            player.Kills++;
 
+            Console.ReadKey();
             Console.WriteLine();
             Console.WriteLine($"Congratulations... You defeated the evil {monster.Name}!");
             Console.WriteLine();
             Console.WriteLine($"You have gained {xp} xp!");
             Console.WriteLine($"You found {gold} gold.");
 
-            int lucky = random.Next(1, 10);
-            if (lucky == 10)
+            int lucky = random.Next(1, 6);
+            if (lucky == 3)
             {
                 player.HealthPotions++;
                 Console.WriteLine("You have found one health potion.");
@@ -134,7 +140,7 @@ namespace Textgame
 
             Console.ReadLine();
 
-            if (player.Xp >= 500)
+            if (player.Xp >= 400)
             {
                 player.LevelUp();
                 player.Xp = 0;
