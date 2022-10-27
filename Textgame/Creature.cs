@@ -18,6 +18,7 @@ namespace Textgame
         public bool Isdead = false;
         public int Level { get; set; }
         public int MaxHitPoints;
+        
         Random random = new Random();
 
 
@@ -29,6 +30,7 @@ namespace Textgame
             Armor = armor;
             Level = level;
             MaxHitPoints = CurrentHitPoints;
+            
         }
         public void Attack(Player target)
         {
@@ -55,9 +57,9 @@ namespace Textgame
             Console.WriteLine($"Power         : {Power}");
             Console.WriteLine($"Armor         : {Armor}");
             Console.WriteLine("===================");
-
-
         }
+
+       
 
 
 

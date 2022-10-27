@@ -18,9 +18,9 @@ namespace Textgame
         public int HealthPotions { get; set; } = 2;
         public int MaxHitPoints { get; set; } = 15;
         public int attack;
-        public int Gold { get; set; } = 100;
-        public int Level { get; set; } = 0;
-        public bool HasKey = false;
+        public int Gold { get; set; } = 0;
+        public int Level { get; set; } = 1;
+        public bool HasKey = true;
         public int Kills { get; set; } = 0;
         Random random = new Random();
 

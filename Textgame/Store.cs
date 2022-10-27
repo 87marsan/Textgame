@@ -13,7 +13,7 @@ namespace Textgame
         {
             Console.Clear();
             string input = "";
-            while (input != "5")
+            while (input != "6")
             {
                 Console.Clear();
                 Console.WriteLine($"Gold    : {player.Gold}");
@@ -25,11 +25,12 @@ namespace Textgame
                 Console.WriteLine();
                 Console.WriteLine("What would you like to buy?");
                 Console.WriteLine("");
-                Console.WriteLine("1. Health potion    < 60  g>");
-                Console.WriteLine("2. Old rusty key    < 300 g>");
-                Console.WriteLine("3. Potion of Power  < 500 g>");
-                Console.WriteLine("4. Gamble ***");
-                Console.WriteLine("5. Exit store");
+                Console.WriteLine("1. Health potion       < 60  g>");
+                Console.WriteLine("2. Old rusty key       < 300 g>");
+                Console.WriteLine("3. Potion of Power++2  < 400 g>");
+                Console.WriteLine("4. Potion of Armor++2  < 500 g");
+                Console.WriteLine("5. Gamble ***");
+                Console.WriteLine("6. Exit store");
                 input = Console.ReadLine();
                 switch (input)
                 {
@@ -68,7 +69,7 @@ namespace Textgame
 
                         break;
                     case "3":
-                        if (player.Gold > 499)
+                        if (player.Gold > 399)
                         {
                             int Price = 500;
                             player.Gold = player.Gold - Price;
@@ -78,6 +79,16 @@ namespace Textgame
                         }
                         break;
                     case "4":
+                        if (player.Gold > 499)
+                        {
+                            int Price = 500;
+                            player.Gold = player.Gold - Price;
+                            Console.WriteLine("You bought a magical potion, suddenly you feel stronger!!");
+                            player.Armor = +2;
+                            Console.ReadKey();
+                        }
+                        break;
+                    case "5":
                         Gamble(player);
                         break;
 
