@@ -8,7 +8,6 @@
         {
             Game newgame = new Game();
             newgame.Start();
-            newgame.Chapter1();
         }
 
         

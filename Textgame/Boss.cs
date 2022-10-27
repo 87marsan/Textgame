@@ -8,7 +8,7 @@ namespace Textgame
 {
     public class Boss : Creature
     {
-        public Boss(string name, int power, int hitPoints, int armor) : base(name, power, hitPoints, armor)
+        public Boss(string name, int power, int hitPoints, int armor, int level) : base(name, power, hitPoints, armor, level)
         {
         }
     }

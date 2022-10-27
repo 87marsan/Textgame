@@ -16,22 +16,25 @@ namespace Textgame
         public int Armor { get; set; }
         public int attack;
         public bool Isdead = false;
+        public int Level { get; set; }
+        public int MaxHitPoints;
         Random random = new Random();
 
 
-        public Creature(string name, int power, int currentHitPoints, int armor)
+        public Creature(string name, int power, int currentHitPoints, int armor, int level)
         {
             Name = name;
             Power = power;
             CurrentHitPoints = currentHitPoints;
             Armor = armor;
+            Level = level;
+            MaxHitPoints = CurrentHitPoints;
         }
         public void Attack(Player target)
         {
-
             attack = random.Next(0, Power);
-
-
+            attack -= target.Armor;
+            if (attack < 0) attack = 0;
         }
         public void TakeDamage(int attack)
         {
@@ -47,7 +50,7 @@ namespace Textgame
             {
                 Console.ForegroundColor = ConsoleColor.Red;
             }
-            Console.WriteLine($"HP            : {CurrentHitPoints}");
+            Console.WriteLine($"HP            : {CurrentHitPoints} / {MaxHitPoints}");
             Console.ResetColor();
             Console.WriteLine($"Power         : {Power}");
             Console.WriteLine($"Armor         : {Armor}");

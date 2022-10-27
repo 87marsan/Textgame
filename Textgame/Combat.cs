@@ -116,8 +116,23 @@ namespace Textgame
 
         public void Win(Player player, Creature monster)
         {
-            int xp = random.Next(2, monster.Power * 10);
-            int gold = random.Next(0, monster.Power * 3);
+            int xp = 0;
+            if (monster.Level < 2)
+            {
+                xp = random.Next(10,20);
+            }
+
+            if (monster.Level == 2)
+            {
+                xp = random.Next(20,40);
+            }
+
+            if (monster.Level > 2)
+            {
+                xp = random.Next(40,70);
+            }
+           
+            int gold = random.Next(3, monster.Power * 5);
 
             player.Gold = player.Gold + gold;
             player.Xp = player.Xp + xp;
@@ -130,11 +145,18 @@ namespace Textgame
             Console.WriteLine($"You have gained {xp} xp!");
             Console.WriteLine($"You found {gold} gold.");
 
-            int lucky = random.Next(1, 6);
-            if (lucky == 3)
+            int potionFind = random.Next(1, 6);
+            if (potionFind == 3)
             {
                 player.HealthPotions++;
                 Console.WriteLine("You have found one health potion.");
+            }
+
+            int keyfind = random.Next(1, 20);
+            if (keyfind == 11)
+            {
+                player.HasKey = true;
+                Console.WriteLine("You found a rusty old key ! ! ! ");
             }
 
 

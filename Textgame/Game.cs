@@ -11,11 +11,13 @@ namespace Textgame
     {
         Player player = new Player("player");
         Combat combat = new Combat();
+        Store store = new Store();
         Random random = new Random();
+        
 
         public void Start()
         {
-            Console.WriteLine("Welcome to the forrest");
+            Console.WriteLine("Welcome to the Game");
             Console.WriteLine();
             Console.WriteLine("Let's begin with your name... ");
             Console.Write("Enter name: ");
@@ -25,8 +27,12 @@ namespace Textgame
             Console.WriteLine();
             player.PrintStats();
             Console.WriteLine();
+            Console.WriteLine($"{player.Name} wake up out in the wilderness and don't remember a thing. All you can see is a house with a locked door.");
+            Console.WriteLine("-I need to find the key i guess?");
+            Console.WriteLine();
             Console.WriteLine("Press any key to start your journey!");
             Console.ReadKey();
+            Chapter1();
         }
 
         public void Chapter1()
@@ -37,9 +43,13 @@ namespace Textgame
             {
                 Console.WriteLine("=============================================================");
                 Console.WriteLine("1. Search the wilderness...");
-                Console.WriteLine("2. Go to the house(key requierd)");
+                Console.WriteLine();
+                Console.WriteLine("2. Go to the house with the locked door.");
+                Console.WriteLine();
                 Console.WriteLine("3. Set camp and restore some health. Maybe visit the shop?");
+                Console.WriteLine();
                 Console.WriteLine("4. Check Stats/Inventory");
+                Console.WriteLine();
                 Console.WriteLine("5. Exit game");
 
 
@@ -74,22 +84,27 @@ namespace Textgame
 
         }
 
+        public void Chapter2()
+        {
+
+        }
+
         public void SearchWilderness()
         {
             Console.Clear();
-            Console.WriteLine("You searching the forest looking for a key to the house...");
+            Console.WriteLine("You searching the wilderness looking for a key to the strange house...");
             Console.ReadKey();
             int nr = random.Next(1, 6);
             switch (nr)
             {
                 case 1:
-                    Console.WriteLine("Something approche");
-                    combat.Fight(player, new Creature("Rat", 5, 6, 0));
-                    combat.Fight(player, new Creature("Snake", 6, 5, 0));
+                    Console.WriteLine("Something approach");
+                    combat.Fight(player, new Creature("Rat", 5, 6, 0,1));
+                    combat.Fight(player, new Creature("Snake", 6, 5, 0,1));
                     break;
                 case 2:
-                    Console.WriteLine("Something approche");
-                    combat.Fight(player, new Creature("Troll", 8, 10, 0));
+                    Console.WriteLine("Something approach");
+                    combat.Fight(player, new Creature("Troll", 8, 10, 0,2));
                     break;
                 case 3:
                     Console.WriteLine();
@@ -97,15 +112,15 @@ namespace Textgame
                     Console.ReadKey();
                     break;
                 case 4:
-                    Console.WriteLine("Something approche");
-                    combat.Fight(player, new Creature("Rat", 5, 6, 0));
-                    combat.Fight(player, new Creature("Giant rat", 7, 7, 0));
+                    Console.WriteLine("Something approach");
+                    combat.Fight(player, new Creature("Rat", 5, 6, 0,1));
+                    combat.Fight(player, new Creature("Giant rat", 7, 7, 0,2));
                     break;
                 case 5:
-                    Console.WriteLine("Something approche");
-                    combat.Fight(player, new Creature("Rat", 5, 6, 0));
-                    combat.Fight(player, new Creature("Rat", 5, 6, 0));
-                    combat.Fight(player, new Creature("Rat", 5, 6, 0));
+                    Console.WriteLine("Something approach");
+                    combat.Fight(player, new Creature("Rat", 5, 6, 0,1));
+                    combat.Fight(player, new Creature("Rat", 5, 6, 0,1));
+                    combat.Fight(player, new Creature("Rat", 5, 6, 0,1));
                     break;
                 case 6:
                     Console.WriteLine("You found a health potion!");
@@ -121,12 +136,14 @@ namespace Textgame
             if (player.HasKey)
             {
                 Console.WriteLine("You lock up the door and enter the house...");
+                Console.ReadKey();
+                Chapter2();
             }
             else
             {
-                Console.WriteLine("You don't have the key to the door...");
+                Console.WriteLine("You don't have the key to the door!");
                 Console.WriteLine("");
-                Console.WriteLine("Suggest you search the forrest.");
+                Console.WriteLine("Suggest you search the wilderness...");
                 Console.WriteLine("Don't forget to visit the shop for potions!");
                 Console.ReadKey();
             }
@@ -136,7 +153,7 @@ namespace Textgame
         {
             Console.Clear();
             Console.WriteLine($"{player.CurrentHitPoints}/{player.MaxHitPoints}");
-            Console.WriteLine($"{player.Name} set camp and restore some health...");
+            Console.WriteLine($"{player.Name} set up camp for the night and restore some health...");
             player.CurrentHitPoints = player.MaxHitPoints;
             Console.ReadKey();
             Console.Clear();
@@ -148,82 +165,12 @@ namespace Textgame
             Console.WriteLine("2. Venture forth");
             string input = Console.ReadLine();
             if (input == "1")
-                Store();
-            Console.Clear();
-        }
-
-        public void Store()
-        {
-            Console.Clear();
-            string input = "";
-            while (input != "4")
             {
-                Console.Clear();
-                Console.WriteLine($"Gold    : {player.Gold}");
-                Console.WriteLine($"Potions : {player.HealthPotions}");
-                Console.WriteLine();
-                Console.WriteLine("()()()()()()()()()()()()");
-                Console.WriteLine();
-                Console.WriteLine("Welcome friend!!");
-                Console.WriteLine();
-                Console.WriteLine("What would you like to buy?");
-                Console.WriteLine("");
-                Console.WriteLine("1. Health potion    <60  g>");
-                Console.WriteLine("2. Old rusty key    <300 g>");
-                Console.WriteLine("3. Potion of Power  <500 g>");
-                Console.WriteLine("4. Gamble ***");
-                Console.WriteLine("4. Exit store");
-                input = Console.ReadLine();
-                switch (input)
-                {
-                    case "1":
-                        if (player.Gold > 59)
-                        {
-                            int Price = 60;
-                            player.Gold = player.Gold - Price;
-                            player.HealthPotions++;
-                            Console.WriteLine("You have bought 1 health potion.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("You don't have the gold...");
-                            Console.ReadKey();
-                            Console.Clear();
-                        }
-
-                        break;
-                    case "2":
-                        if (player.Gold > 299)
-                        {
-                            int Price = 300;
-                            player.Gold = player.Gold - Price;
-                            player.HasKey = true;
-                            Console.WriteLine("You have bought an old rusty key.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("You don't have the gold...");
-                            Console.ReadKey();
-                            Console.Clear();
-                        }
-
-                        break;
-                    case "3":
-                        if (player.Gold > 499)
-                        {
-                            int Price = 500;
-                            player.Gold = player.Gold - Price;
-                            Console.WriteLine("You bought the magical potion, suddenly you feel stronger!!");
-                            player.Power =+ 2;
-                            Console.ReadKey();
-                        }
-                        break;
-                        
-                }
-                
+                store.Shop(player);
             }
-            Console.WriteLine("See you soon!");
-            Console.ReadKey();
+            Console.Clear();
         }
+
+        
     }
 }
