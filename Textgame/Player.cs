@@ -20,7 +20,7 @@ namespace Textgame
         public int attack;
         public int Gold { get; set; } = 0;
         public int Level { get; set; } = 1;
-        public bool HasKey = true;
+        public bool HasKey = false;
         public int Kills { get; set; } = 0;
         Random random = new Random();
 
