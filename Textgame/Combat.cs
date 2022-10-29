@@ -152,9 +152,17 @@ namespace Textgame
                 Console.WriteLine("You have found one health potion.");
             }
 
+            int HasKeyLoot = random.Next(1, 20);
+            {
+                if (HasKeyLoot == 10)
+                {
+                    player.HasKey = true;
+                    Console.WriteLine("You found a old rusty key ! ! ! ! ! ! ! ! !");
+                }
+            }
             Console.ReadLine();
 
-            if (player.Xp >= 400)
+            if (player.Xp >= 300)
             {
                 player.LevelUp();
                 player.Xp = 0;

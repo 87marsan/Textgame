@@ -74,7 +74,7 @@ namespace Textgame
                             int Price = 500;
                             player.Gold = player.Gold - Price;
                             Console.WriteLine("You bought a magical potion, suddenly you feel stronger!!");
-                            player.Power = +2;
+                            player.Power +=2;
                             Console.ReadKey();
                         }
                         break;
@@ -84,7 +84,7 @@ namespace Textgame
                             int Price = 500;
                             player.Gold = player.Gold - Price;
                             Console.WriteLine("You bought a magical potion, suddenly you feel stronger!!");
-                            player.Armor = +2;
+                            player.Armor +=2;
                             Console.ReadKey();
                         }
                         break;

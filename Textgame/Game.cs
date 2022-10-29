@@ -265,10 +265,10 @@ namespace Textgame
 
         public void TheBasement()
         {
-            if (player.Level < 10)
+            if (player.Level < 6)
             {
                 Console.Clear();
-                Console.WriteLine("You need to be at least level 10 to enter...");
+                Console.WriteLine("You need to be at least level 6 to enter...");
                 Console.ReadLine();
             }
             else
